@@ -1,85 +1,93 @@
 ## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
-  message = FALSE,
-  warning = FALSE,
+  message = FALSE,  warning = FALSE,
+
+  fig.height = 2.5,
+  fig.width = 5,
   comment = "#>"
 )
 
-## ---- echo = FALSE------------------------------------------------------------
-library(dplyr)
+## ----eval=FALSE, echo=FALSE---------------------------------------------------
+#  p <-
+#    show_colors() +
+#    theme_void() +
+#    labs(subtitle = NULL) +
+#    facet_wrap(~facet, nrow = 1) +
+#    theme(strip.text = element_blank()) +
+#    coord_fixed()
+#  
+#  p$layers[[1]]$aes_params$colour <- "black"
+#  p$layers[[2]] <- NULL
+#  
+#  p
+
+## ---- eval=FALSE--------------------------------------------------------------
+#  sc("brightgreen2", "mutedblue3")
+#  #> "#8FFF8F" "#5E82C9"
+
+## -----------------------------------------------------------------------------
 library(ggplot2)
 library(simplecolors)
 
-## -----------------------------------------------------------------------------
-sc("red", "violet", "pink")
+p <- 
+  ggplot(mpg, aes(y = drv, fill = drv)) +
+  geom_bar() 
+
+
+p + scale_fill_manual(values = c("lightblue", "blue", "navyblue"))
 
 ## -----------------------------------------------------------------------------
-sc("brightblue4", "mutedorange5", "grey3")
+p + scale_fill_manual(values = sc("blue2", "blue3", "blue4"))
 
-## ----echo=F, eval=F-----------------------------------------------------------
-#  p1 <-
-#    sc_within(hue = "teal", light = 1:5, sat = "bright", return = "plot") +
-#    labs(title = 'sc_within(hue = "teal", light = 3:5, sat = "bright")')
-#  
-#  p2 <-
-#    sc_across(palette = "RTVGy", light = 4, sat = "muted", return = "plot") +
-#    labs(title = 'sc_across(palette = "RTVGy", light = 4, sat = "muted")')
-#  
-#  p3 <-
-#    sc_red(1:4, "bright", return = "plot") +
-#    labs(title = 'sc_red(1:4, "bright")')
-#  
-#  gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
+
+## ----eval=FALSE---------------------------------------------------------------
+#  p + scale_fill_manual(values = c("#9DB9F1", "#4479E4", "#16439C"))
 
 ## -----------------------------------------------------------------------------
-sc_within(hue = "teal", light = 3:5, sat = "bright")
+p + scale_fill_manual(values = sc_blue(light = 2:4))
+
+
+## ----eval=FALSE---------------------------------------------------------------
+#  sc_blue(light = 2:4)
+#  #> "#9DB9F1" "#4479E4" "#16439C"
 
 ## -----------------------------------------------------------------------------
-sc_across(palette = "OTVGy", light = 4, sat = "muted")
-
-## -----------------------------------------------------------------------------
-sc_within(hue = "blue", light = 2:5, sat = "") #defaults
-
-## -----------------------------------------------------------------------------
-sc_within(hue = "blue", return = "table")
-
-## -----------------------------------------------------------------------------
-sc_within(hue = "blue", return = "plot")
-
-## -----------------------------------------------------------------------------
-sc_across(palette = "ROY", light = 3)
-
-## -----------------------------------------------------------------------------
-sc_across(palette = "ROY", light = 3, return = "table")
-
-## -----------------------------------------------------------------------------
-sc_across(palette = "ROY", light = 3, sat = "bright", return = "plot")
+p + scale_fill_manual(values = sc_violet(light = 3:5, sat = "dull"))
 
 
 ## -----------------------------------------------------------------------------
-color_table %>% 
-  distinct(color, letter)
+p + scale_fill_manual(values = c("blue", "purple", "red"))
 
 ## -----------------------------------------------------------------------------
-sc_red(1:4, "bright")
+p + scale_fill_manual(values = sc_across("BVR"))
 
 ## -----------------------------------------------------------------------------
-sc_blue(5:2, return = "table")
+p + scale_fill_manual(values = sc_across(palette = "BVR", sat = "bright"))
 
 ## -----------------------------------------------------------------------------
-sc_pink(c(1,3,5), sat = "dull", return = "plot")
+p + scale_fill_manual(values = sc_across(palette = "BVR", light = 4))
+
 
 ## -----------------------------------------------------------------------------
-blue_and_red <-  c(
-  sc_blue(4:2, "bright"), 
-  sc_red(2:4, "bright")
-)
+p + scale_fill_manual(values = sc_across(palette = "BGyR"))
 
-iris %>% 
-  mutate(cut = ntile(Sepal.Length, 6)) %>% 
-  ggplot(aes(Sepal.Width, Sepal.Length, color = factor(cut))) +
-  geom_count(size = 5) +
-  #setting your custom gradients
-  scale_color_manual(values = blue_and_red) +
-  theme_minimal()
+## ----fig.height=4-------------------------------------------------------------
+library(dplyr)
+
+ggplot(mpg, aes(cty, hwy, color = hwy)) +
+  geom_count(alpha = 0.8) +
+  scale_color_gradient(
+    low  = sc("brightorange3"), 
+    high = sc("brightviolet3")
+  )
+
+## ---- fig.align="hold"--------------------------------------------------------
+sc_green(return = "plot")
+sc_across(palette = "RTVGy", light = 4, sat = "muted", return = "plot")
+
+## -----------------------------------------------------------------------------
+sc_pink(return = "table")
+
+## ----eval=FALSE---------------------------------------------------------------
+#  show_colors(labels = TRUE)
 

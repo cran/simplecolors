@@ -4,7 +4,8 @@
 \name{color_table}
 \alias{color_table}
 \title{Table of available colors}
-\format{A data frame with 200 observations and 15 variables
+\format{
+A data frame with 200 observations and 15 variables
 \describe{
 \item{H360}{hue on a 0-360 scale}
 \item{L1}{lightness on a 0-1 scale}
@@ -21,7 +22,8 @@
 \item{G}{the green of the RGB value}
 \item{B}{the blue of the RGB value}
 \item{H255}{for convenience as some HLS selection tools use a 0-255 scale}
-}}
+}
+}
 \usage{
 color_table
 }
