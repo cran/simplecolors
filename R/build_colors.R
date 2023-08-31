@@ -10,7 +10,6 @@
 #' @return data.frame
 #' @noRd
 #'
-
 build_colors <- function() {
   hue_values <- # seq(0, 330, round(330 / 11, 0))
     # c(0, 40, 60, 120, 180, 220, 270, 300)
@@ -41,8 +40,8 @@ build_colors <- function() {
       S1 = 0
     )) %>%
     # add white & black
-    rbind(c(360, 0, 0, 6, 0)) %>%
-    rbind(c(360, 1, 0, 0, 0)) %>%
+    rbind(c(360, 0, 0)) %>%
+    rbind(c(360, 1, 0)) %>%
     #filter(H360 == 360 & S1 == 0 | H360 != 360) %>%
     mutate(
       light = as.integer(factor(L1, levels = rev(l_values))),
@@ -104,7 +103,9 @@ build_colors <- function() {
 
 #' Show all available colors
 #'
-#' Plots the \code{\link{color_table}} values.
+#' @description Plots all available color values.
+#' @return Returns a plot object
+#' @details Labels can be added by using the argument \code{labels = TRUE}
 #'
 #' @param labels logical TRUE (default) will plot the color with color names, FALSE will plot the colors only
 #' @return ggplot
@@ -116,9 +117,7 @@ build_colors <- function() {
 #' @export
 #'
 #' @examples
-#'
 #' show_colors()
-
 show_colors <- function(labels = FALSE) {
 
   df <-
@@ -142,7 +141,7 @@ show_colors <- function(labels = FALSE) {
     geom_tile(aes(fill = hex), color = "grey90") +
     geom_tile(
       aes(x = factor(""), y = factor(3)),
-      fill = NA, color = "white", size = 1.5
+      fill = NA, color = "white", linewidth = 1.5
     ) +
     scale_fill_identity() +
     theme(panel.background = element_rect(fill = "white", color = "grey90")) +
@@ -167,3 +166,4 @@ or with modifiers "brightpink2", "mutedred3", "blue4"'
   p
 
 }
+

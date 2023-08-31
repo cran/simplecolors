@@ -10,12 +10,16 @@ show_colors(labels = FALSE)
 \item{labels}{logical TRUE (default) will plot the color with color names, FALSE will plot the colors only}
 }
 \value{
+Returns a plot object
+
 ggplot
 }
 \description{
-Plots the \code{\link{color_table}} values.
+Plots all available color values.
+}
+\details{
+Labels can be added by using the argument \code{labels = TRUE}
 }
 \examples{
-
 show_colors()
 }

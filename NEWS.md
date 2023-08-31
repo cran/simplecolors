@@ -1,4 +1,11 @@
-# 0.1.1 Hot fix for CRAN
-Fixes the issue [#36](https://github.com/rjake/simplecolors/issues/36): `color_table` reference needs namespace in functions
+# simplecolors 0.1.2
+- Fix github URLs & news format #56
+- Replace Travis CI with GitHub Actions #46
+- Fix package alias #57
 
-# 0.1.0 Initial release
+# simplecolors 0.1.1 
+### Hot fix for CRAN
+- Adds `simplecolors::color_table` namespace to default value in functions #36
+
+# simplecolors 0.1.0
+- Initial release

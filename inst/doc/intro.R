@@ -1,7 +1,6 @@
 ## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   message = FALSE,  warning = FALSE,
-
   fig.height = 2.5,
   fig.width = 5,
   comment = "#>"
